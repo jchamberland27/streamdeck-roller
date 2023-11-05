@@ -7,6 +7,18 @@ function diceInitialize(container, w, h) {
         set.style.width = set.value.length + 3 + 'ex';
     }
 
+    const socket = io();
+
+    socket.on('connect', () => {
+        console.log('Backend Connected');
+    });
+
+    socket.on('roll', (data) => {
+        console.log('Roll request received');
+        set.dataset.fullDieProps = data;
+        initiateRoll();
+    });
+
     $t.remove($t.id('loading_text'));
 
     var canvas = $t.id('canvas');
@@ -55,6 +67,21 @@ function diceInitialize(container, w, h) {
         }
         label.innerHTML = res;
         infoDiv.style.display = 'inline-block';
+    }  
+
+    function initiateRoll() {
+        console.log('Calculating roll');
+        var coords = {x: (box.rnd() * 2 - 1) * box.w,
+            y: -(box.rnd() * 2 - 1) * box.h};
+        var dist = Math.sqrt(coords.x * coords.x + coords.y * coords.y);
+        var dieSpec = set.dataset.fullDieProps || '{"set":[], "constant":0}';
+        var dieSet = JSON.parse(dieSpec);
+        if (dieSet.set.length === 0) {
+            return;
+        }
+        var boost = (box.rnd() + 3) * dist;
+        coords.x /= dist; coords.y /= dist;
+        box.rollDice(dieSet, coords, boost, beforeRoll, afterRoll);
     }
 
     $t.bind(container, ['mousedown', 'touchstart'], function(ev) {
@@ -91,18 +118,7 @@ function diceInitialize(container, w, h) {
             return;
         }
         ev.stopPropagation();
-        var coords = {x: (box.rnd() * 2 - 1) * box.w,
-                      y: -(box.rnd() * 2 - 1) * box.h};
-        var dist = Math.sqrt(coords.x * coords.x + coords.y * coords.y);
-        var dieSpec = set.dataset.fullDieProps || '{"set":[], "constant":0}';
-        var dieSet = JSON.parse(dieSpec);
-        if (dieSet.set.length === 0) {
-            return;
-        }
-        var boost = (box.rnd() + 3) * dist;
-        coords.x /= dist; coords.y /= dist;
-
-        box.rollDice(dieSet, coords, boost, beforeRoll, afterRoll);
+        initiateRoll();
     });
 
     $t.bind(container, ['mouseup', 'touchend', 'touchcancel'], function(ev) {
