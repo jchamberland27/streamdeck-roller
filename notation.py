@@ -6,6 +6,15 @@ def dice_notation_to_list(dice_notation):
     result = [f'd{dice_type}' for _ in range(number_of_dice)]
     return result
 
+
+def check_if_die(part):
+    """determine if a part is a number or a die"""
+    if part[0] == 'd':
+        return True
+    else:
+        return False
+
+
 def prepare_roll(roll):
     """Prepare a roll for output."""
     json = {'set':[], 'constant':0}

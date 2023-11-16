@@ -7,6 +7,7 @@ import json
 
 app = Flask(__name__)
 socketio = SocketIO(app)
+partial_roll = '0'
 current_roll = []
 last_roll = []
 hotkey_rolls = {}
@@ -19,13 +20,27 @@ def display_ui():
     return render_template('index.html')
 
 
-@app.route('/add')
-def add():
+@app.route('/add_full')
+def add_full():
     """Add to the current roll"""
     #TODO Validate the input
     global current_roll
     current_roll.extend(notation.dice_notation_to_list(request.args.get('add')))
-    return 'ADD OK'
+    return 'ADD_FULL OK'
+
+
+@app.route('/add_partial')
+def add_partial():
+    global partial_roll, current_roll
+    """Build a roll element piece by piece"""
+    if notation.check_if_die(request.args.get('add')):
+        partial_roll += request.args.get('add')
+        current_roll.extend(notation.dice_notation_to_list(partial_roll))
+        partial_roll = '0'
+        return 'ADD_PARTIAL OK'
+    else:
+        partial_roll = str(int(partial_roll) + int(request.args.get('add')))
+        return 'ADD_PARTIAL OK'
 
 
 @app.route('/clear')
@@ -33,6 +48,7 @@ def clear():
     """Clear the current roll"""
     global current_roll, hotkey_set
     current_roll = []
+    partial_roll = '0'
     hotkey_set = False
     return 'CLEAR OK'
 
