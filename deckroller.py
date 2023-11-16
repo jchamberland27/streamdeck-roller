@@ -34,6 +34,8 @@ def add_partial():
     global partial_roll, current_roll
     """Build a roll element piece by piece"""
     if notation.check_if_die(request.args.get('add')):
+        if partial_roll == '0':
+            partial_roll = '1'
         partial_roll += request.args.get('add')
         current_roll.extend(notation.dice_notation_to_list(partial_roll))
         partial_roll = '0'
