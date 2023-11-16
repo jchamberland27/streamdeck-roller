@@ -6,6 +6,7 @@ The plan for MVP is to take the original Teal 3d dice roller and:
   - [ ] Come up with a good way to organize a Stream Deck XL dashboard
   - [ ] Come up with a good way to organize a Stream Deck dashboard
   - [ ] Dockerize the app
+  - [ ] Tooling to automate hostname setting within the profiles
 
 ### Done
   - [x] Serve index.html with a Python Flask app to be accessed from a browser
