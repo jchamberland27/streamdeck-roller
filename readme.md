@@ -1,6 +1,18 @@
 # Stream Deck Roller
 
-## The Plan
+## Usage
+Recommended way to run is with Docker
+
+### Docker
+You should be able to get an image up on port 5000 by running ```./docker_build_and_deploy.sh``` in the docker directory on a system that has a running docker environment.
+
+### Just Run It
+Navigate to the src directory, install the dependencies:
+```pip3 install -r requirements.txt```
+Then just run deckroller.py with gunicorn
+```gunicorn -b 0.0.0.0:5000 --worker-class eventlet -w 1 deckroller:app```
+
+## Roadmap
 The plan for MVP is to take the original Teal 3d dice roller and:
 
 ### ToDo
@@ -22,17 +34,6 @@ The plan for MVP is to take the original Teal 3d dice roller and:
   - [x] Access the API to control the roller via Stream Deck using the Bar Raiders API ninja plugin: https://docs.barraider.com/faqs/api-ninja/
   - [x] Dockerize the app
 
-## Usage
-There's something wrong with gunicorn that is causing the workers to tip over, might be because my linux dev server is so small. Until I figure out what's up with that follow the instructions in the Just Run It section
-
-### Just Run It
-Navigate to the src directory, install the dependencies:
-```pip3 install -r requirements.txt```
-Then just run deckroller.py
-```python3 deckroller.py```
-
-### Docker
-You should be able to get an image up on port 5000 by running ./docker_build_and_deploy.sh on a system that has a running docker environment. Once the gunicorn stuff is sorted out this will be the recommended way to deploy the service.
 
 # Original Pre-Fork Readme
 Teal 3d dice sources.
