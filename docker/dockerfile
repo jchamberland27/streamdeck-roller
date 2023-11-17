@@ -10,8 +10,8 @@ COPY . /app
 # Install any needed packages specified in requirements.txt
 RUN pip3 install -r requirements.txt
 
-# Make port 80 available to the world outside this container
+# Make port 5000 available to the world outside this container
 EXPOSE 5000
 
-# Run app.py when the container launches
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "deckroller:app"]
+# Run app when the container launches
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "--worker-class", "eventlet", "-w" , "1", "deckroller:app"]

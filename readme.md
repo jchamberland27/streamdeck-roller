@@ -4,7 +4,6 @@
 The plan for MVP is to take the original Teal 3d dice roller and:
 
 ### ToDo
-  - [ ] Figure out why gunicorn workers keep dying after a single request.
   - [ ] Come up with a good way to organize a Stream Deck XL dashboard
   - [ ] Come up with a good way to organize a Stream Deck dashboard
   - [ ] Tooling to automate hostname setting within the Stream Deck profiles
@@ -12,6 +11,7 @@ The plan for MVP is to take the original Teal 3d dice roller and:
   - [ ] Push images to some sort of docker repo rather than just building and deploying onsite in the target system.
 
 ### Done
+  - [x] Figure out why gunicorn workers keep dying after a single request.
   - [x] Serve index.html with a Python Flask app to be accessed from a browser
   - [ ] ~~Strip out the dice selection UI from the HTML~~ Existing UI is still pretty useful for more complex expressions. 
   - [x] Duplicate the original dice UI functionality using API endpoints to build rolling parameters:

@@ -4,7 +4,7 @@
 
 (function() {
 
-    var randomStorage = [], useRandomStorage = true;
+    var randomStorage = [], useRandomStorage = false;
 
     function createShape(vertices, faces, radius) {
         var cv = [], cf = [];

@@ -48,7 +48,7 @@ def add_partial():
 @app.route('/clear')
 def clear():
     """Clear the current roll"""
-    global current_roll, hotkey_set
+    global current_roll, hotkey_set, partial_roll
     current_roll = []
     partial_roll = '0'
     hotkey_set = False
