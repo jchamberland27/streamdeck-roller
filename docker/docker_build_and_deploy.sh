@@ -9,7 +9,7 @@ if [ -z "$1" ]
 fi
 
 # move dockerfile into place
-cp dockerfile ../src/
+cp Dockerfile ../src/
 cd ../src
 
 # build and run docker image on port passed into script
@@ -17,7 +17,7 @@ docker image build -t streamdeck-roller .
 docker run -d -p $1:5000 streamdeck-roller
 
 #cleanup
-rm dockerfile
+rm Dockerfile
 
 # dump out running containers
 echo "Running containers after deployment:"

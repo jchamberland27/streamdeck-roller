@@ -30,7 +30,7 @@ The plan for MVP is to take the original Teal 3d dice roller and:
   - [ ] Come up with a good way to organize a Stream Deck XL dashboard
   - [ ] Come up with a good way to organize a Stream Deck dashboard
   - [ ] Tooling to automate hostname setting within the Stream Deck profiles
-  - [ ] Configurable port in build and deploy script.
+  - [x] Configurable port in build and deploy script.
   - [ ] Push images to some sort of docker repo rather than just building and deploying onsite in the target system.
 
 ### Done
